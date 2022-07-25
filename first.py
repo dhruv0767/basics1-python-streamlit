@@ -1,7 +1,7 @@
 import streamlit as st
 import sys
 
-tab1, tab2= st.tabs(["First ", "Second"])
+tab1, tab2,tab3= st.tabs(["First ", "Second","Third"])
 with tab1:
     st.title("Welcome to streamlit practices lab !")
     st.write("Here we're going to use python to solve some problems .")
@@ -243,3 +243,151 @@ with lm2:
 st.write("Here's the result : ",sdf(x,c))
 #By the end i've displayed the results and didn't switch to string .
     """,language ="python")
+
+with tab3:
+    st.title("This is the third part of the basics of python and streamlit .")
+    st.header("7th practice")
+    st.write("### Write a program that would find the smallest and the biggest number in an array of 1 Dimention , the length of the array could be any , the array contains floats . (take into consideration the empty array .)")
+    st.write("Here's the solution :")
+
+    array=[14,8,9,25,0,-1]
+    #array=[]
+
+    #I've defined two arrays one that contains numbers and the other is
+    #empty
+
+    #At the beginning i've defined the array that i'll be working with.
+    st.write("The array is : ",array)
+
+    def small_big(arr):
+        if len(arr)!=0:
+            small=arr[0]
+            big=arr[0]
+        else :
+            return "The array is empty ."
+        for i in array:
+            if i<small :
+                small=i
+            if i>big:
+                big=i
+        return big,small
+
+
+
+    result = small_big(array)
+    if isinstance(result, str):
+        st.write("The array is empty")
+    else :
+        big,small=small_big(array)
+        st.write(f"The smallest number of the array is {small} and the biggest number of the array is {big} .")
+    st.write("Here's the code solution :")
+
+
+    st.code("""
+array=[14,8,9,25,0,-1]
+#array=[]
+
+#I've defined two arrays one that contains numbers and the other is
+#empty
+
+#At the beginning i've defined the array that i'll be working with.
+st.write("The array is : ",array)
+
+def small_big(arr):
+    if len(arr)!=0:
+        small=arr[0]
+        big=arr[0]
+    else :
+        return "The array is empty ."
+    for i in array:
+        if i<small :
+            small=i
+        if i>big:
+            big=i
+    return big,small
+#Then i've defined the function that has two return vales .
+#I've put the first array of the list into the variable
+#small and big that refers to the smallest and the biggest
+#variables on the array .
+#Then i went through the list looking if there was any variable
+#inside the list if its bigger than the big or smaller than the
+#small variable and from there i've changed the values .
+result = small_big(array)
+if isinstance(result, str):
+    st.write("The array is empty")
+else :
+    big,small=small_big(array)
+    st.write(f"The smallest number of the array is {small} and the biggest number of the array is {big} .")
+#I've displayed the results in case the array is empty and in case
+#there's numbers on the array .
+""" ,language="python")
+    st.write("---")
+
+    st.header("8th practice ")
+    st.write("### Write a program that would append one number into the array and remove it from the array .(take in consideration the empty array )")
+    st.write("Here's the solution :")
+
+    arrr=[0,5,12,150,25]
+    if "arrr" not in st.session_state:
+        st.session_state['arrr']=arrr
+
+    added_value=st.number_input("Enter the value of the last element: ",1)
+    ladd=st.button("Add to the list ! !")
+    if ladd:
+        st.session_state['arrr'].append(added_value)
+    popping=st.button("Pop the last element out !")
+    if popping:
+        if st.session_state['arrr']!=[]:
+            st.session_state['arrr'].pop()
+
+    st.write(st.session_state['arrr'])
+
+    st.write("Here's the code solution : ")
+    st.code("""
+arrr=[0,5,12,150,25]
+#first i initiated the list .
+
+
+if "arrr" not in st.session_state:
+    st.session_state['arrr']=arrr
+
+#Then i've charged the variable into a session_state to store it
+#and to make it accecible and modifiable because
+#we're going to use it all along the program .
+
+
+added_value=st.number_input("Enter the value of the last element: ",1)
+#Then i've took an input of the user entered number.
+
+
+ladd=st.button("Add to the list ! !")
+#After that i've used a button to add to the list .
+
+if ladd:
+    st.session_state['arrr'].append(added_value)
+#Then i've used the if statement set to be triggered
+#if the user enter a new value .
+#So the entered value would be automatically stored
+#into our array .
+
+
+popping=st.button("Pop the last element out !")
+#Then i've added a button to pop out the last element .
+
+
+if popping:
+    if st.session_state['arrr']!=[]:
+        st.session_state['arrr'].pop()
+#if it's triggered and array is not empty , the last element
+#would pop out .
+
+st.write(st.session_state['arrr'])
+#By the end i've wrote down all the array with st.write
+""",language="python"
+    )
+
+
+
+
+
+#
