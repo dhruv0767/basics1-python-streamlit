@@ -1,7 +1,7 @@
 import streamlit as st
 import sys
 
-tab1, tab2,tab3= st.tabs(["First ", "Second","Third"])
+tab1, tab2,tab3,tab4= st.tabs(["First ", "Second","Third","Fourth"])
 with tab1:
     st.title("Welcome to streamlit practices lab !")
     st.write("Here we're going to use python to solve some problems .")
@@ -387,7 +387,134 @@ st.write(st.session_state['arrr'])
     )
 
 
+with tab4:
+    st.title("4th part of solving practices using python and streamlit .")
+    st.write("On this part we're going to make plots using different libraries ")
+    st.write("---")
+    st.header("8th practice")
+    st.write("### Plot a line chart of a random 1D table .")
+    st.write("Here's the solution : ")
+    from numpy import random
+    x = random.randint(0,5,10)
+    st.line_chart(x)
+    st.write("Here's the code solution : ")
+
+    st.code("""
+from numpy import random
+#We'll use that library to generate random numbers .
+
+x = random.randint(0,5,10)
+#In here i generated 10 random numbers from 0 to 4.
+
+st.line_chart(x)
+#This is how i plotted the line chart .
+    """)
+
+    st.write("---")
+    st.header("9th practice")
+    st.write("### Plot a bar chart of a random 1D table")
+    st.write("Here's the solution : ")
+    x = random.randint(0,5,10)
+    st.bar_chart(x)
+    st.write("Here's the code solution : ")
+
+    st.code("""
+x = random.randint(0,5,10)
+#In here i generated 10 random numbers from 0 to 4 ,
+#same thing is we did before .
+
+st.bar_chart(x)
+#This is how i plotted the bar chart .
+
+    """)
+    st.write('---')
+    st.header("10th practice")
+    st.write("### Plot an area chart of a 2D array .")
+    st.write("Here's the solution : ")
+    x = random.randint(0,5,(10,2))
+    st.area_chart(x)
+    st.write("Here's the code solution : ")
+    st.code("""
+x = random.randint(0,5,(10,2))
+#In here i've done the same thing as before but now , i've
+#choose 2D array with the length of 10 in each .
+
+
+st.area_chart(x)
+#With that line of code i've plotted the line chart of the array.
+    """,language="python")
+    st.write("---")
+    st.header("11th practice")
+    st.write("### Use matplotlib to plot a 1D chart .")
+    st.write("Here's the solution : ")
+    import matplotlib.pyplot as plt
+    x=random.randint(0,5,10)
+
+    
+    fig, ax = plt.subplots()
+    ax.hist(x)
+    st.pyplot(fig)
+    st.write("Here's the code solution : ")
+    st.code("""
+import matplotlib.pyplot as plt
+#Here i've imported pyplot from matplotlib as plt
+#as a shortcut .
+
+x=random.randint(0,5,10)
+#in here i've generated the empty array .
+
+fig, ax = plt.subplots()
+ax.hist(x)
+#here i've called the function subplots to plot
+#the selected data
+#i've received two variables
+#one that we'll use to plot
+#and the other to assign the array that we want to plot
+
+st.pyplot(fig)
+#this function would plot the graph in streamlit web application
+    """,language="python")
 
 
 
-#
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    #
