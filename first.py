@@ -1,7 +1,7 @@
 import streamlit as st
 import sys
 
-tab1, tab2,tab3,tab4= st.tabs(["First ", "Second","Third","Fourth"])
+tab1, tab2,tab3,tab4,tab5= st.tabs(["First ", "Second","Third","Fourth","Fifth"])
 with tab1:
     st.title("Welcome to streamlit practices lab !")
     st.write("Here we're going to use python to solve some problems .")
@@ -450,7 +450,7 @@ st.area_chart(x)
     import matplotlib.pyplot as plt
     x=random.randint(0,5,10)
 
-    
+
     fig, ax = plt.subplots()
     ax.hist(x)
     st.pyplot(fig)
@@ -475,6 +475,187 @@ st.pyplot(fig)
 #this function would plot the graph in streamlit web application
     """,language="python")
 
+with tab5:
+    st.title("5th part of solving practices using python and streamlit .")
+    st.write ("Here we would display multiple charts on the window .")
+    st.write("---")
+    st.header("12th practice")
+    st.write("### Plot 4 charts , two by two of a random 1D array.")
+    st.write("Here's the solution : ")
+    c1=random.randint(0,5,10)
+    c2=random.randint(0,5,10)
+    c3=random.randint(0,5,10)
+    c4=random.randint(0,5,10)
+
+    cc1,cc2=st.columns([1,1])
+    with cc1:
+        st.line_chart(c1)
+        st.line_chart(c2)
+    with cc2:
+        st.line_chart(c3)
+        st.line_chart(c4)
+
+    st.write("Here's the code solution :")
+    st.code("""
+    c1=random.randint(0,5,10)
+    c2=random.randint(0,5,10)
+    c3=random.randint(0,5,10)
+    c4=random.randint(0,5,10)
+    #In here i generated 10 random numbers from 0 to 4
+    #them on an array
+
+    cc1,cc2=st.columns([1,1])
+    #In here i created two columns using streamlit.
+
+    with cc1:
+        st.line_chart(c1)
+        st.line_chart(c2)
+    #I used the first column to plot the first two charts.
+    with cc2:
+        st.line_chart(c3)
+        st.line_chart(c4)
+    #I used the second column to plot the second two charts .
+    """,language="python")
+
+    st.write("---")
+    st.header('Practice number 13')
+    st.write("### Write a code that would display 4 plotly charts two by two.")
+    import plotly.graph_objects as go
+    from plotly.subplots import make_subplots
+
+
+    fig = make_subplots(
+        rows=2, cols=2,
+        specs=[[{"type": "xy"}, {"type": "polar"}],
+               [{"type": "domain"}, {"type": "scene"}]],
+    )
+    y=random.randint(1,10,5)
+    fig.add_trace(go.Bar(y=y),row=1, col=1)
+    theta=random.randint(0,360,5)
+    r=random.randint(1,100,4)
+    fig.add_trace(go.Barpolar(theta=theta, r=r),row=1, col=2)
+    value=random.randint(1,5,4)
+    fig.add_trace(go.Pie(values=value),row=2, col=1)
+    x=random.randint(0,6,10)
+    y=random.randint(0,6,10)
+    z=random.randint(0,6,10)
+    fig.add_trace(go.Scatter3d(x=x, y=y,z=z, mode="lines"),row=2, col=2)
+
+    st.plotly_chart(fig)
+
+    st.write("Here's the code solution : ")
+    st.code("""
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+#Here i imported the libraries that i need .
+
+
+fig = make_subplots(
+    rows=2, cols=2,
+    specs=[[{"type": "xy"}, {"type": "polar"}],
+           [{"type": "domain"}, {"type": "scene"}]],
+)
+#In here i initiated the subplots
+
+
+y=random.randint(1,10,5)
+fig.add_trace(go.Bar(y=y),row=1, col=1)
+#in here i generated the random numbers and added a trace
+#to the final plot that we're going to make .
+
+
+theta=random.randint(0,360,5)
+r=random.randint(1,100,4)
+fig.add_trace(go.Barpolar(theta=theta, r=r),row=1, col=2)
+#In here i did the same thing as previous , hence the plots are
+#Different so they would need different parameters that i generated.
+
+
+value=random.randint(1,5,4)
+fig.add_trace(go.Pie(values=value),row=2, col=1)
+#I've done the same thing over here , generating new parameters
+#and plotting it on the chart .
+
+
+x=random.randint(0,6,10)
+y=random.randint(0,6,10)
+z=random.randint(0,6,10)
+fig.add_trace(go.Scatter3d(x=x, y=y,z=z, mode="lines"),row=2, col=2)
+#this was about plotting a 3D chart
+#it requires 3D array input , each one on a different array .
+
+#I was able to not display the labels but i kept them .
+
+st.plotly_chart(fig)
+#By the end i've plotted the fig variable that we kept adding to
+#it during all the process and it was the final result .
+    """,language="python")
+    st.write("---")
+    st.header("Practice number 14 ")
+    st.write("### Display 4 charts using matplotlib two by two ")
+    st.write("Here's the solution :")
+    import matplotlib.pyplot as plt
+    fig, axs = plt.subplots(2, 2)
+    x=random.randint(0,6,10)
+    axs[0, 0].plot(x)
+    axs[0, 0].set_title('Plot number 1')
+
+    x=random.randint(0,6,10)
+    axs[0, 1].plot(x, 'tab:orange')
+    axs[0, 1].set_title('Plot number 2')
+
+    x=random.randint(0,6,10)
+    axs[1, 0].plot(x, 'tab:green')
+    axs[1, 0].set_title('Plot number 3')
+
+    x=random.randint(0,6,10)
+    axs[1, 1].plot(x, 'tab:red')
+    axs[1, 1].set_title('Plot number 4')
+
+    for ax in axs.flat:
+        ax.label_outer()
+    st.pyplot(fig)
+
+    st.write("Here's the code solution : ")
+    st.code("""
+import matplotlib.pyplot as plt
+#In here i've imported the library that i'll use .
+
+
+fig, axs = plt.subplots(2, 2)
+#Over here i've made subplots to follow the instructions .
+
+x=random.randint(0,6,10)
+axs[0, 0].plot(x)
+axs[0, 0].set_title('Plot number 1')
+#Here i generated the random numbers .
+#After that i've plotted them into their part from the subplots.
+#so each plot would go to it place
+
+x=random.randint(0,6,10)
+axs[0, 1].plot(x, 'tab:orange')
+axs[0, 1].set_title('Plot number 2')
+#Same thing here .
+#as you can see i've added the title .
+
+
+x=random.randint(0,6,10)
+axs[1, 0].plot(x, 'tab:green')
+axs[1, 0].set_title('Plot number 3')
+#same thing here and on the one below .
+
+x=random.randint(0,6,10)
+axs[1, 1].plot(x, 'tab:red')
+axs[1, 1].set_title('Plot number 4')
+
+for ax in axs.flat:
+    ax.label_outer()
+#in order for the display would be on it place i've used
+#this method to hide the X axis numbers .
+
+st.pyplot(fig)
+#At the end i've plotted the final figure using this function.
+    """)
 
 
 
