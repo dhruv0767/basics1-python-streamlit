@@ -1,7 +1,7 @@
 import streamlit as st
 import sys
 
-tab1, tab2,tab3,tab4,tab5= st.tabs(["First ", "Second","Third","Fourth","Fifth"])
+tab1, tab2,tab3,tab4,tab5,tab6= st.tabs(["First ", "Second","Third","Fourth","Fifth","Sixth"])
 with tab1:
     st.title("Welcome to streamlit practices lab !")
     st.write("Here we're going to use python to solve some problems .")
@@ -657,30 +657,262 @@ st.pyplot(fig)
 #At the end i've plotted the final figure using this function.
     """)
 
+with tab6:
+    st.title("Welcome to solving the practices using python and streamlit !")
+    st.write("Here we'll create object and see how it works using python and streamlit .")
+    st.write("---")
+    st.header("Practice number 15")
+    st.write("### Create an object named living_being and put on it the following variables :name,age, height and the weight ; Also make two inputs and a button to push the objects into an array and pop the last element, display the array at the end.")
+    st.write("Here's the solution : ")
+    class living_being:
+        def __init__(self,name,height,weight,age):
+            self.height=str(height)+'cm'
+            self.weight=str(weight)+'kg'
+            self.name=name
+            self.age=str(age)+"years"
 
 
 
+    if "tb" not in st.session_state:
+        tb=[]
+        st.session_state['tb']=tb
+
+    en1,en2=st.columns([1,1])
+    with en1:
+        name=st.text_input("Enter the name of the living being","cat")
+        height=st.number_input("Enter the height",60)
+        weight=st.number_input("Enter the weight",2)
+        age=st.number_input("Enter the age",2)
+
+    with en2:
+        st.write("")
+        st.text("")
+        t1=st.button("Add object to the list")
+        tZ=st.button("Push the last element of the list of objects out .")
+
+    if t1:
+
+        lb=living_being(name,height,weight,age)
+        st.session_state['tb'].append(lb)
+    elif tZ:
+        if st.session_state['tb']!=[]:
+            st.session_state['tb'].pop()
+    st.write("Here's the element of your list : ")
+    for i in st.session_state['tb']:
+        st.write(vars(i))
+    st.write("Here's the code solution : ")
+
+    st.code("""
+class living_being:
+    def __init__(self,name,height,weight,age):
+        self.height=str(height)+'cm'
+        self.weight=str(weight)+'kg'
+        self.name=name
+        self.age=str(age)+"years"
+#At the start i've defined a class to create the objects from it .
+#i've put the method init to initiate the things that i will use
 
 
+tb=[]
+#After that i've created a new table .
+
+if "tb" not in st.session_state:
+    st.session_state['tb']=tb
+#Then i've called the session state to store the variable in that array
+#And we'll later on put the objects of that class in it.
 
 
+en1,en2=st.columns([1,1])
+#After that i've created two columns to make the data look presentable.
+
+with en1:
+    name=st.text_input("Enter the name of the living being","cat")
+    height=st.number_input("Enter the height",60)
+    weight=st.number_input("Enter the weight",2)
+    age=st.number_input("Enter the age",2)
+#On the first column i received the inputs .
+
+with en2:
+    st.write("")
+    st.text("")
+    t1=st.button("Add object to the list")
+    tZ=st.button("Push the last element of the list of objects out .")
+#On the second column i've put the buttons in order to push in or pop
+#out of the list .
 
 
+if t1:
+    lb=living_being(name,height,weight,age)
+    st.session_state['tb'].append(lb)
+#In here if the user pressed the button to push hte data it would be triggered.
+
+elif t2:
+    if st.session_state['tb']!=[]:
+        st.session_state['tb'].pop()
+#same thing here but to pop the last element out .
+
+st.write("Here's the element of your list : ")
+for i in st.session_state['tb']:
+    st.write(vars(i))
+#here i've plotted the data
+
+    """,language="python")
+
+    st.write("---")
+    st.header("Practice number 16")
+    st.write("### Write a program that would create objects of animal that would heritate from the previous created class with the methods eat , sleep and live that would print that those those actions,call those functions if the user press a button , add the variable type in it.(Take the informations from the user just like the previous practice .) ")
+    st.write("Here's what should be printed by calling the method eat :  the animal cat has the name of rose is living ")
+    class animal(living_being):
+        def __init__(self,name,height,weight,age,type):
+            super().__init__(name,height,weight,age)
+            self.type=type
+        def eat(self):
+            return "the animal "+self.type+" has the name of "+self.name +" is eating "
+        def sleep(self):
+            return "the animal "+self.type+" has the name of "+self.name +" is sleeping "
+        def live(self):
+            return "the animal "+self.type+" has the name of "+self.name +" is living "
+
+    ta=[]
+
+    if "ta" not in st.session_state:
+        st.session_state['ta']=ta
+
+    st1,st2=st.columns([1,1])
+
+    with st1:
+        name=st.text_input("Enter the name of the animal","rose")
+        height=st.number_input("Enter the height of the animal",60)
+        weight=st.number_input("Enter the weight of the animal",2)
+        age=st.number_input("Enter the age of the animal",2)
+
+    with st2:
+
+        type=st.text_input("Enter the type of the animal","cat")
+        p1=st.button("Add object to the list of animals")
+        p2=st.button("Push the last element of the list of objects animals out .")
+
+    if p1:
+        lb=animal(name,height,weight,age,type)
+        st.session_state['ta'].append(lb)
+
+    elif p2:
+        if st.session_state['ta']!=[]:
+            st.session_state['ta'].pop()
+
+    final_print=""
+    x1,x2,x3=st.columns([1,1,1])
+    with x1:
+        eat=st.button("Eat")
+    with x2:
+        sleep=st.button("Sleep")
+    with x3:
+        live=st.button("live")
 
 
+    if eat:
+        if st.session_state["ta"]!=[]:
+            final_print=st.session_state['ta'][-1].eat()
+    if sleep:
+        if st.session_state["ta"]!=[]:
+            final_print=st.session_state['ta'][-1].sleep()
+    if live:
+        if st.session_state["ta"]!=[]:
+            final_print=st.session_state['ta'][-1].live()
+
+    st.write("Here's the result : "+final_print)
+    st.write("Here's the element of your list : ")
+    for i in st.session_state['ta']:
+        st.write(vars(i))
+    st.write("Here's the code solution : ")
+    st.code("""
+class animal(living_being):
+    def __init__(self,name,height,weight,age,type):
+        super().__init__(name,height,weight,age)
+        self.type=type
+    def eat(self):
+        return "the animal "+self.type+" has the name of "+self.name +" is eating "
+    def sleep(self):
+        return "the animal "+self.type+" has the name of "+self.name +" is sleeping "
+    def live(self):
+        return "the animal "+self.type+" has the name of "+self.name +" is living "
+#in here i've initiated the class animal that's heritating from
+#the class living being .
 
 
+ta=[]
+#After that i've initiated an empty array
+if "ta" not in st.session_state:
+    st.session_state['ta']=ta
+#I've called the session state to store the empty array if
+#it does not exist
 
 
+st1,st2=st.columns([1,1])
+#After that i've created two columns
 
 
+with st1:
+    name=st.text_input("Enter the name of the animal","rose")
+    height=st.number_input("Enter the height of the animal",60)
+    weight=st.number_input("Enter the weight of the animal",2)
+    age=st.number_input("Enter the age of the animal",2)
+#I putted on the first column the inputs of the user and setted
+#the default values .
 
 
+with st2:
+
+    type=st.text_input("Enter the type of the animal","cat")
+    p1=st.button("Add object to the list of animals")
+    p2=st.button("Push the last element of the list of objects animals out .")
+#I've put a text input as well as buttons to receive
+#what the user entered .
 
 
+if p1:
+    lb=animal(name,height,weight,age,type)
+    st.session_state['ta'].append(lb)
 
 
+elif p2:
+    if st.session_state['ta']!=[]:
+        st.session_state['ta'].pop()
+#Same thing as the previous practice
 
+
+final_print=""
+x1,x2,x3=st.columns([1,1,1])
+with x1:
+    eat=st.button("Eat")
+with x2:
+    sleep=st.button("Sleep")
+with x3:
+    live=st.button("live")
+#In here i've created three columns
+#On each one there's a button .
+
+
+if eat:
+    if st.session_state["ta"]!=[]:
+        final_print=st.session_state['ta'][-1].eat()
+if sleep:
+    if st.session_state["ta"]!=[]:
+        final_print=st.session_state['ta'][-1].sleep()
+if live:
+    if st.session_state["ta"]!=[]:
+        final_print=st.session_state['ta'][-1].live()
+#If one of those three buttons is pressed the correspendant
+#method would be called from the last element of the array of objects.
+
+
+st.write("Here's the result of the last element of the array of objects: "+final_print)
+st.write("Here's the element of your list : ")
+for i in st.session_state['ta']:
+    st.write(vars(i))
+#At the end i've printed the final result
+#As well as the array of objects and its values .
+    """,language="python")
 
 
 
